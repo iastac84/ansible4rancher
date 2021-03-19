@@ -1,0 +1,55 @@
+---
+
+- name: Copy Transparent Huge Pages (THP) Unit file with owner and permissions
+  copy:
+    src: /home/ec2-user/ansible2021/volt-worker/files/disable-transparent-huge-pages.service
+    dest: /usr/lib/systemd/system/disable-transparent-huge-pages.service
+    owner: root
+    group: root
+    mode: '0644'
+  tags: [thp,thp_copy]
+
+- name: Enable and restart the disable Transparent Huge Pages (THP) service, also issue daemon-reload to pick up config changes
+  systemd:
+    name: disable-transparent-huge-pages
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+  tags: [thp,thp_disable,never]
+
+- name: Copy script to disable TSO and GRO
+  copy: 
+    src: /home/ec2-user/ansible2021/volt-worker/files/ifup-local
+    dest: /sbin/ifup-local
+    owner: root
+    group: root
+    mode: '0700'
+  tags: [tsogro]
+
+- name: Enable Virtual Memory Mapping 
+  shell: sysctl -w vm.max_map_count=1048576
+  tags: [virtmem]
+    
+- name: Enable Virtual Memory and Overcommit
+  shell: sysctl -w vm.overcommit_memory=1
+  tags: [virtmem]
+
+- name: Update /etc/sysctl.conf VM Mapping
+  shell: echo "vm.max_map_count=1048576" >> /etc/sysctl.d/99-sysctl.conf
+  tags: [virtmem]
+
+- name: Update /etc/sysctl.conf VM Mapping
+  shell: echo "vm.overcommit_memory=1" >> /etc/sysctl.d/99-sysctl.conf
+  tags: [virtmem]
+
+- name: Update /etc/sysctl.conf VM Mapping
+  lineinfile:
+    path: /etc/sysctl.d/99-sysctl.conf
+    line: 'vm.max_map_count=1048576'
+  tags: [virtmem2]
+
+- name: Update /etc/sysctl.conf VM Overcommit
+  lineinfile:
+    path: /etc/sysctl.d/99-sysctl.conf
+    line: 'vm.overcommit_memory=1'
+  tags: [virtmem2]

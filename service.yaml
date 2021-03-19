@@ -1,0 +1,9 @@
+---
+- name: start chronyd
+  hosts: all
+
+  tasks:
+  - name: start chronydd
+    service: 
+      name: chronyd 
+      state: started

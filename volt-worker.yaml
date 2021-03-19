@@ -1,0 +1,6 @@
+---
+- hosts: volt
+  become: yes
+  gather_facts: yes
+  roles:
+    - { role: volt-worker }

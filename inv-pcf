@@ -1,0 +1,10 @@
+[rke]
+a1pcfdevrke01
+[dev]
+a1pcfdev01
+[k8smaster]
+a1pcfdevk8smaster01
+[k8svolt]
+a1pcfdevk8svlt01
+[k8sapp]
+a1pcfdevk8sapp01

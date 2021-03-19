@@ -1,0 +1,10 @@
+---
+users:
+
+  - username: USER
+    password: "$1$salty$DTuZDV7toftLwZYQazoOF0"
+    comment: "USER"
+    group: openet
+    groups: wheel,docker
+    use_sudo: no
+

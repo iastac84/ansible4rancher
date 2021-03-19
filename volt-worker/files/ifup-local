@@ -1,0 +1,6 @@
+#!/bin/bash
+if [ -n "$1" ]; then
+   /sbin/ethtool -K $1 tso off gro off 
+fi 
+/sbin/ethtool -K eth0 tso off gro off
+exit 0
