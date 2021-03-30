@@ -1,0 +1,15 @@
+---
+vncusers:
+
+  - username: cbell
+    group: openet
+    displaynumber: 1
+
+  - username: nroth
+    group: openet
+    displaynumber: 2
+
+  - username: csosa
+    group: openet
+    displaynumber: 3
+
