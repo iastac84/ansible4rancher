@@ -28,12 +28,12 @@
     with_items: '{{vncusers}}'
 
   - name: Create ~/Desktop directory
-    shell: mkdir /home/{{ item.username }}/Desktop
+    shell: mkdir -p /home/{{ item.username }}/Desktop
     with_items: '{{vncusers}}'
     tags: mkdirdesktop
 
   - name: Create ~/.vnc directory
-    shell: mkdir /home/{{ item.username }}/.vnc
+    shell: mkdir -p /home/{{ item.username }}/.vnc
     with_items: '{{vncusers}}'
     tags: mkdirdesktop
 
@@ -43,14 +43,14 @@
 
   - name: Copy xstartup
     copy:
-      src: /home/ec2-user/ansible2021/vnc-setup/files/xstartup
+      src: ./vnc-setup/files/xstartup
       dest: /home/{{ item.username }}/.vnc/xstartup
       mode: '0755'
     with_items: '{{vncusers}}'
 
   - name: Copy vnc passwd file
     copy:
-      src: /home/ec2-user/ansible2021/vnc-setup/files/passwd
+      src: ./vnc-setup/files/passwd
       dest: /home/{{ item.username }}/.vnc/passwd
       mode: '0600'
     with_items: '{{vncusers}}'
